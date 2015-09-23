@@ -16,7 +16,7 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class YoursClothing {
+public class YoursClothingTest {
 
     private static WebDriver driver;
 
@@ -38,14 +38,14 @@ public class YoursClothing {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        log.add("Starting test for site", false);
+        log.add("Starting test for Yours US", false);
 
         try {
 
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
-            driver.get("http://www.yoursclothing.co.uk");
+            driver.get("http://www.yoursclothing.com");
             log.add("Go to site", true);
             driver.findElement(By.id("search-query")).clear();
             driver.findElement(By.id("search-query")).sendKeys("bracelet");
@@ -138,14 +138,14 @@ public class YoursClothing {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        log.add("Starting test for site", false);
+        log.add("Starting test for Bad Rhino", false);
 
         try {
 
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
-            driver.get("http://www.yoursclothing.co.uk");
+            driver.get("http://www.badrhino.com");
             log.add("Go to site", true);
             driver.findElement(By.id("search-query")).clear();
             driver.findElement(By.id("search-query")).sendKeys("watch");
@@ -239,7 +239,7 @@ public class YoursClothing {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        log.add("Starting test for site", false);
+        log.add("Starting test for Yours UK", false);
 
         try {
 

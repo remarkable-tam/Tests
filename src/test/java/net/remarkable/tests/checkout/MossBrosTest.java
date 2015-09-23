@@ -17,9 +17,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class MossBros {
+public class MossBrosTest {
 
     private static WebDriver driver;
 
@@ -29,6 +30,166 @@ public class MossBros {
         profile.setPreference("browser.private.browsing.autostart", true);
         driver = new FirefoxDriver(profile);
         driver.manage().window().maximize();
+    }
+
+    @Test
+    public void mossHire() throws IOException, MessagingException {
+
+        String configName = "MossBrosHire";
+        String testName = "Moss Bros Hire Checkout";
+
+        Config setUp = new Config(configName, testName, driver);
+        Logger log = setUp.getLog();
+        SendMessages msg = setUp.getMsg();
+        String cardError = setUp.getError();
+
+        log.add("Starting test", false);
+
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        try {
+
+            driver.get("http://www.mossbroshire.co.uk/");
+            log.add("Go to site", true);
+
+            driver.findElement(By.cssSelector(("#weddingPromo > div > a"))).click();
+            log.add("Start planning", true);
+
+            // Event Details
+            driver.findElement(By.id("FunctionName")).sendKeys("Checkout Tester");
+            log.add("Enter function name", true);
+
+            Select numberInGroup = new Select(driver.findElement(By.id("NumberInGroup")));
+            numberInGroup.selectByVisibleText("1");
+            log.add("Select number in group", true);
+
+            //Wait for Your Account to open
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("collapseAccount"))));
+
+            driver.findElements(By.className("material-checkbox--for-panel")).get(1).click();
+            log.add("Login to existing account", true);
+
+            driver.findElement(By.id("LoginEmailAddress")).sendKeys("checkouttester@remarkable.net");
+            log.add("Enter username", true);
+
+            driver.findElement(By.id("LoginPassword")).sendKeys("password");
+            log.add("Enter password", true);
+
+            driver.findElements(By.name("ForceRegister")).get(1).click();
+            log.add("Login", true);
+
+            driver.findElement(By.cssSelector("#collapseYourDetails > div > div:nth-child(2) > div.form-group > div > button")).click();
+            log.add("Continue", true);
+
+            //Wait for Date of Event to open
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("collapseTwo"))));
+
+            driver.findElements(By.className("ui-state-optimal")).get(1).click();
+            log.add("Select recommended day", true);
+
+            //Wait for Collection Plan to open
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("collapseThree"))));
+
+            driver.findElement(By.id("LookupStore")).sendKeys("NG15 0HT");
+            log.add("Enter postcode for store lookup", true);
+
+            driver.findElements(By.className("btnLookupStore")).get(0).click();
+            log.add("Find my store", true);
+
+            Select storeLookup = new Select(driver.findElement(By.id("LookupStoreDropdowncollection")));
+            List<WebElement> list = storeLookup.getOptions();
+            for (WebElement item : list) {
+                if (item.getText().contains("Mansfield")) {
+                    storeLookup.selectByVisibleText(item.getText());
+                }
+            }
+            log.add("Select address", true);
+
+            //Wait for Date of Delivery to open
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("collapseFour"))));
+
+            driver.findElements(By.className("ui-state-optimal")).get(1).click();
+            log.add("Select recommended day", true);
+
+            //Wait for tooltip to be clickable and click
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div.material-box__content > h3 > label")))).click();
+            log.add("Click store delivery", true);
+
+            //Wait for Return Plans to open
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("collapseSix"))));
+
+            driver.findElements(By.className("material-checkbox--for-panel")).get(2).click();
+            log.add("Return to store", true);
+
+            driver.findElements(By.className("js-next-section-click")).get(3).click();
+            log.add("Continue", true);
+
+            //Wait for Date of Return to open
+            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("collapseFive"))));
+
+            driver.findElements(By.className("ui-state-optimal")).get(1).click();
+            log.add("Select recommended day", true);
+
+            driver.findElement(By.cssSelector(".event-proccess-next > div > div > input")).click();
+            log.add("Continue", true);
+
+            //Select Outfit
+            Select chooseOutfit = new Select(driver.findElement(By.name("outfitID")));
+            chooseOutfit.selectByVisibleText("CheckoutTester");
+            log.add("Select outfit", true);
+
+            //Choose sizes
+            driver.findElements(By.className("btn-block")).get(1).click();
+            log.add("Continue", true);
+
+            wait.until(ExpectedConditions.urlContains("confirmation"));
+
+            //Confirmation
+            driver.findElements(By.className("material-checkbox")).get(0).click();
+            log.add("Accept Terms", true);
+
+            driver.findElements(By.className("btn-block")).get(2).click();
+            log.add("Place order", true);
+
+            //Payment
+            driver.findElement(By.id("CardNumber")).sendKeys("5555555555555555");
+            log.add("Enter card number", true);
+
+            Select expiryMonth = new Select(driver.findElement(By.name("ExpMonth")));
+            expiryMonth.selectByVisibleText("05");
+            log.add("Select expiry month", true);
+
+            Select expiryYear = new Select(driver.findElement(By.name("ExpYear")));
+            expiryYear.selectByVisibleText("2019");
+            log.add("Select expiry year", true);
+
+            driver.findElement(By.id("CV2")).sendKeys("123");
+            log.add("Enter security number", true);
+
+            driver.findElement(By.id("buttonSubmit")).click();
+            log.add("Pay now", true);
+
+            String errorText = driver.findElement(By.className("jumbotron")).getText();
+            Boolean checkExpected = errorText.contains(cardError);
+
+            if (!checkExpected) {
+                log.add("Expected error not found", true);
+                msg.send("<b>Expected text could not be found.<br /><br />Expected:</b> " + cardError + "<br /><br /><b>Returned:</b> " + errorText);
+                Assert.fail("Expected text could not be found");
+            } else {
+                log.delScr();
+                log.add("Expected card error was found - screenshots deleted", false);
+            }
+        } catch (Exception e) {
+            String eS = e.toString();
+            log.add("Exception found", true);
+            log.add(eS, false);
+
+            msg.send("<b>An exception was found</b><br /><br /> " + eS);
+            Assert.fail("An exception was found");
+        }
+
+        log.add("Test finished\n", false);
     }
 
     @Test
