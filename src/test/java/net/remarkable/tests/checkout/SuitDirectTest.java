@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,6 +29,7 @@ public class SuitDirectTest {
         profile.setPreference("browser.private.browsing.autostart", true);
         driver = new FirefoxDriver(profile);
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @Test
@@ -47,9 +47,7 @@ public class SuitDirectTest {
 
         try {
 
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, 20);
 
             String[] products = {"TE910975", "TE910976", "TE910977", "TE910978", "SC910787", "AS910947", "SC910786",
                     "SC910905", "SC910792", "SC910900", "SC910902", "SC910901", "TE9140450", "LH920678", "TE920979",
@@ -139,10 +137,7 @@ public class SuitDirectTest {
             driver.findElement(By.id("content_LinkButton1")).click();
             log.add("Pay By Card", true);
 
-            WebElement iframe = driver.findElement(By.cssSelector(".adminbox > iframe"));
-
-            // Switch focus to iFrame
-            driver.switchTo().frame(iframe);
+            driver.switchTo().frame(driver.findElement(By.cssSelector(".adminbox > iframe")));
 
             // Enter payment details and submit
             driver.findElement(By.id("inputCardNumber")).clear();
@@ -163,15 +158,10 @@ public class SuitDirectTest {
             driver.findElement(By.id("proceedButton")).click();
             log.add("Proceed", true);
 
-            driver.switchTo().defaultContent();
-            driver.switchTo().frame(iframe);
-            wait.until(ExpectedConditions.invisibilityOfElementWithText(By.className("bodytextbold"), "Please wait while your transaction is authorised with the bank."));
-            log.add("Wait till loading message disappears", true);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("formCardDetails")));
 
-            // Switch focus to iFrame
-            driver.switchTo().frame(iframe);
+            log.add("Wait for error message", true);
 
-            log.add("Find error message", true);
             String errorText = driver.findElement(By.id("formCardDetails")).getText();
             Boolean checkExpected = errorText.contains(cardError);
 

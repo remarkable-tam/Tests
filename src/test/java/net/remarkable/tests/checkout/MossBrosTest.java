@@ -30,6 +30,7 @@ public class MossBrosTest {
         profile.setPreference("browser.private.browsing.autostart", true);
         driver = new FirefoxDriver(profile);
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @Test
@@ -45,7 +46,7 @@ public class MossBrosTest {
 
         log.add("Starting test", false);
 
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 
         try {
 
@@ -203,13 +204,11 @@ public class MossBrosTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 
         log.add("Starting test", false);
 
         try {
-
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
             String[] products = { "965460815", "965460807", "965462213", "965462204", "965284601", "965284813",
                     "965461322", "965461501", "965461414", "965461809", "965326003", "965570214", "965326018",

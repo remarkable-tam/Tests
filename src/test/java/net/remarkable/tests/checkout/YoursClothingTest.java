@@ -29,6 +29,7 @@ public class YoursClothingTest {
         profile.setPreference("browser.private.browsing.autostart", true);
         driver = new FirefoxDriver(profile);
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @Test
@@ -41,14 +42,11 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
 
         log.add("Starting test for Yours US", false);
 
         try {
-
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 
             driver.get("http://www.yoursclothing.com");
             log.add("Go to site", true);
@@ -145,14 +143,11 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
 
         log.add("Starting test for Bad Rhino", false);
 
         try {
-
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 
             driver.get("http://www.badrhino.com");
             log.add("Go to site", true);
@@ -250,15 +245,11 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
 
         log.add("Starting test for Yours UK", false);
 
         try {
-
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-            //WebDriverWait wait = new WebDriverWait(driver, 10);
 
             driver.get("http://www.yoursclothing.co.uk");
             log.add("Go to site", true);
