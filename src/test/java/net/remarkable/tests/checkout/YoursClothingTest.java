@@ -11,7 +11,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +41,8 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         log.add("Starting test for Yours US", false);
 
         try {
@@ -59,6 +64,8 @@ public class YoursClothingTest {
             // Add to Bag and go to Basket
             log.add("Add to bag", true);
             driver.findElement(By.className("addToBag")).click();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
 
             log.add("Go to Basket", true);
             driver.findElement(By.className("goToBasket")).click();
@@ -138,6 +145,8 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         log.add("Starting test for Bad Rhino", false);
 
         try {
@@ -159,6 +168,8 @@ public class YoursClothingTest {
             // Add to Bag and go to Basket
             log.add("Add to bag", true);
             driver.findElement(By.className("addToBag")).click();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
 
             log.add("Go to Basket", true);
             driver.findElement(By.className("goToBasket")).click();
@@ -239,6 +250,8 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         log.add("Starting test for Yours UK", false);
 
         try {
@@ -261,6 +274,8 @@ public class YoursClothingTest {
             // Add to Bag and go to Basket
             log.add("Add to bag", true);
             driver.findElement(By.className("addToBag")).click();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
 
             log.add("Go to Basket", true);
             driver.findElement(By.className("goToBasket")).click();

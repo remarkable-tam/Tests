@@ -168,12 +168,10 @@ public class SuitDirectTest {
             wait.until(ExpectedConditions.invisibilityOfElementWithText(By.className("bodytextbold"), "Please wait while your transaction is authorised with the bank."));
             log.add("Wait till loading message disappears", true);
 
-            driver.findElement(By.name("search")).sendKeys(Keys.HOME);
-            log.add("View error message", true);
-
             // Switch focus to iFrame
             driver.switchTo().frame(iframe);
 
+            log.add("Find error message", true);
             String errorText = driver.findElement(By.id("formCardDetails")).getText();
             Boolean checkExpected = errorText.contains(cardError);
 
