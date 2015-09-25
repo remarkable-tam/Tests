@@ -68,9 +68,19 @@ public class YoursClothingTest {
             log.add("Go to Basket", true);
             driver.findElement(By.className("goToBasket")).click();
 
+            // Check for "No Time?" pop up
+            if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
+                driver.findElement(By.className("close-button")).click();
+            }
+
             // Checkout
             log.add("Go to checkout", true);
             driver.findElements(By.className("btn-secondary")).get(0).click();
+
+            // Check for "No Time?" pop up
+            if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
+                driver.findElement(By.className("close-button")).click();
+            }
 
             // Login
             driver.findElement(By.id("email")).clear();
@@ -169,9 +179,19 @@ public class YoursClothingTest {
             log.add("Go to Basket", true);
             driver.findElement(By.className("goToBasket")).click();
 
+            // Check for "No Time?" pop up
+            if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
+                driver.findElement(By.className("close-button")).click();
+            }
+
             // Checkout
             log.add("Go to checkout", true);
             driver.findElements(By.className("btn-secondary")).get(0).click();
+
+            // Check for "No Time?" pop up
+            if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
+                driver.findElement(By.className("close-button")).click();
+            }
 
             // Login
             driver.findElement(By.id("email")).clear();
@@ -271,9 +291,19 @@ public class YoursClothingTest {
             log.add("Go to Basket", true);
             driver.findElement(By.className("goToBasket")).click();
 
+            // Check for "No Time?" pop up
+            if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
+                driver.findElement(By.className("close-button")).click();
+            }
+
             // Checkout
             log.add("Go to checkout", true);
             driver.findElements(By.className("btn-secondary")).get(0).click();
+
+            // Check for "No Time?" pop up
+            if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
+                driver.findElement(By.className("close-button")).click();
+            }
 
             // Login
             driver.findElement(By.id("email")).clear();
