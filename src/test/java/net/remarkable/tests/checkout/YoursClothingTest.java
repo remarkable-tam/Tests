@@ -42,7 +42,7 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
         log.add("Starting test for Yours US", false);
 
@@ -153,7 +153,7 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
         log.add("Starting test for Bad Rhino", false);
 
@@ -265,7 +265,7 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
         log.add("Starting test for Yours UK", false);
 

@@ -46,7 +46,7 @@ public class MossBrosTest {
 
         log.add("Starting test", false);
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 
         try {
 
@@ -204,7 +204,7 @@ public class MossBrosTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 
         log.add("Starting test", false);
 

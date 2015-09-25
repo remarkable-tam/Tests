@@ -47,7 +47,7 @@ public class SuitDirectTest {
 
         try {
 
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(driver, 30);
 
             String[] products = {"TE910975", "TE910976", "TE910977", "TE910978", "SC910787", "AS910947", "SC910786",
                     "SC910905", "SC910792", "SC910900", "SC910902", "SC910901", "TE9140450", "LH920678", "TE920979",
