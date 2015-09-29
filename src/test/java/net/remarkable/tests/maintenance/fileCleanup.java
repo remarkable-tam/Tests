@@ -79,7 +79,7 @@ public class fileCleanup {
         } else {
 
             log.add(file + " last modified within last 2 weeks, not deleting.", false);
-            
+
         }
 
     }

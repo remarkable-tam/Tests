@@ -42,7 +42,7 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
 
         log.add("Starting test for Yours US", false);
 
@@ -63,10 +63,19 @@ public class YoursClothingTest {
             log.add("Add to bag", true);
             driver.findElement(By.className("addToBag")).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
-
-            log.add("Go to Basket", true);
-            driver.findElement(By.className("goToBasket")).click();
+            try {
+                wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
+                log.add("Go to Basket", true);
+                driver.findElement(By.className("goToBasket")).click();
+            } catch(Exception gtb) {
+                log.add("Could not find Go To Basket, using header link", true);
+                log.add(gtb.toString(), false);
+                if (!driver.findElement(By.className("js-quick-basket")).getText().contains("0.00")) {
+                    driver.findElement(By.className("js-quick-basket")).click();
+                } else {
+                    log.add("Product not added to basket", true);
+                }
+            }
 
             // Check for "No Time?" pop up
             if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
@@ -153,7 +162,7 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
 
         log.add("Starting test for Bad Rhino", false);
 
@@ -174,10 +183,19 @@ public class YoursClothingTest {
             log.add("Add to bag", true);
             driver.findElement(By.className("addToBag")).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
-
-            log.add("Go to Basket", true);
-            driver.findElement(By.className("goToBasket")).click();
+            try {
+                wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
+                log.add("Go to Basket", true);
+                driver.findElement(By.className("goToBasket")).click();
+            } catch(Exception gtb) {
+                log.add("Could not find Go To Basket, using header link", true);
+                log.add(gtb.toString(), false);
+                if (!driver.findElement(By.className("js-quick-basket")).getText().contains("0.00")) {
+                    driver.findElement(By.className("js-quick-basket")).click();
+                } else {
+                    log.add("Product not added to basket", true);
+                }
+            }
 
             // Check for "No Time?" pop up
             if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
@@ -265,7 +283,7 @@ public class YoursClothingTest {
         SendMessages msg = setUp.getMsg();
         String cardError = setUp.getError();
 
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
 
         log.add("Starting test for Yours UK", false);
 
@@ -286,10 +304,19 @@ public class YoursClothingTest {
             log.add("Add to bag", true);
             driver.findElement(By.className("addToBag")).click();
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
-
-            log.add("Go to Basket", true);
-            driver.findElement(By.className("goToBasket")).click();
+            try {
+                wait.until(ExpectedConditions.visibilityOfElementLocated((By.className("goToBasket"))));
+                log.add("Go to Basket", true);
+                driver.findElement(By.className("goToBasket")).click();
+            } catch(Exception gtb) {
+                log.add("Could not find Go To Basket, using header link", true);
+                log.add(gtb.toString(), false);
+                if (!driver.findElement(By.className("js-quick-basket")).getText().contains("0.00")) {
+                    driver.findElement(By.className("js-quick-basket")).click();
+                } else {
+                    log.add("Product not added to basket", true);
+                }
+            }
 
             // Check for "No Time?" pop up
             if (driver.findElements(By.className("ve-bounceloop")).size() > 0) {
