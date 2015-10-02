@@ -111,12 +111,12 @@ public class SuitDirectTest {
             modal.click();
 
             // Checkout
-            WebElement veModal = driver.findElement(By.id("WindowCloseBtn"));
-
-            if (veModal.isDisplayed()) {
-                log.add("Close modal if present", true);
-                veModal.click();
-            }
+//            WebElement veModal = driver.findElement(By.id("WindowCloseBtn"));
+//
+//            if (veModal.isDisplayed()) {
+//                log.add("Close modal if present", true);
+//                veModal.click();
+//            }
 
             driver.findElement(By.className("bigbutton")).click();
             log.add("Checkout", true);
