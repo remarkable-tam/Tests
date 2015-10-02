@@ -17,7 +17,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class SuitDirectTest {
 
@@ -90,7 +92,7 @@ public class SuitDirectTest {
                     if (!(driver.findElement(By.className("itemListContainer")).getText()
                             .contains("Sorry no products were found."))) {
                         break;
-                    }  else if (i == (products.length - 1)) {
+                    } else if (i == (products.length - 1)) {
                         log.add("No more products left in array\n\nTried: " + Arrays.toString(products), false);
                         msg.send("No more products left in array<br /><br />Tried products: " + Arrays.toString(products));
                         Assert.fail("No more products left in array");
@@ -111,16 +113,18 @@ public class SuitDirectTest {
             modal.click();
 
             // Checkout
-            WebElement veModal = driver.findElement(By.id("WindowCloseBtn"));
 
-            if (veModal.isDisplayed()) {
+            try {
+                driver.findElement(By.className("bigbutton")).click();
+                log.add("Checkout", true);
+            } catch (Exception chE) {
+                log.add("Close modal and popup if present", true);
                 driver.switchTo().alert().accept();
-                log.add("Close modal if present", true);
-                veModal.click();
+                driver.switchTo().defaultContent();
+                driver.findElement(By.id("WindowCloseBtn")).click();
+                driver.findElement(By.className("bigbutton")).click();
+                log.add("Checkout", true);
             }
-
-            driver.findElement(By.className("bigbutton")).click();
-            log.add("Checkout", true);
 
             // Login
             driver.findElement(By.id("content_txtUserName")).clear();
