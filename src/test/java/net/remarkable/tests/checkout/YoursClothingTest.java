@@ -291,11 +291,19 @@ public class YoursClothingTest {
 
             driver.get("http://www.yoursclothing.co.uk");
             log.add("Go to site", true);
-            driver.findElement(By.id("search-query")).clear();
-            driver.findElement(By.id("search-query")).sendKeys("bracelet");
 
-            log.add("Send keys to search", true);
-            driver.findElement(By.id("search-query")).submit();
+            String slideInBox = driver.findElement(By.className("slideInBox")).getCssValue("display");
+            log.add("SlideInBox status: " + slideInBox, false);
+
+            if (!slideInBox.equals("none")) {
+                log.add("Slide in box present, redirecting", false);
+                driver.get("http://www.yoursclothing.co.uk/jewellery?filter=true&categoryid=3572");
+            } else {
+                log.add("Send keys to search", true);
+                driver.findElement(By.id("search-query")).clear();
+                driver.findElement(By.id("search-query")).sendKeys("bracelet");
+                driver.findElement(By.id("search-query")).submit();
+            }
 
             log.add("Click product", true);
             driver.findElement(By.cssSelector(".listing-items > .row > div:nth-of-type(1) > div > div > a > img")).click();
