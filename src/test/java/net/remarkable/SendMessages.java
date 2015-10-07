@@ -120,9 +120,9 @@ public class SendMessages {
                         msg.setSubject("Test \"" + testName + "\" has failed.");
 
                         File zipFile = log.zipScr();
-                        Boolean zipSize = zipFile.length() < 25000000;
 
                         if (zipFile != null) {
+                            Boolean zipSize = zipFile.length() < 25000000;
                             log.add("Size of ZIP file is " + zipFile.length(), false);
                             if (zipSize) {
                                 log.add("Zip file attached", false);
